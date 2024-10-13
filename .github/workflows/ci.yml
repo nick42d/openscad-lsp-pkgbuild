@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        toolchain: [stable]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install linux deps
+      run: |
+        sudo apt update
+        sudo apt install -y --no-install-recommends snapd
+        sudo snap install just --edge --classic
+
+    - name: Install arch package utils
+      run: bash install-pacman-debian.sh
+      
+    - name: Test this ver
+      run: just test-this-ver

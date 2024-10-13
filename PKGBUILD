@@ -10,6 +10,10 @@ license=('Apache-2.0')
 makedepends=('cargo')
 source=("$pkgname-$pkgver.tar.gz::https://static.crates.io/crates/$pkgname/$pkgname-$pkgver.crate")
 sha256sums=('a1ea8455e21e70c690f1946b39c94015f0e8f38107ed26064d9164c5fd68f6ed')
+# This is the pre-existing lto/rust bug.
+# More info: https://gitlab.archlinux.org/archlinux/packaging/packages/pacman/-/issues/20
+options=(!lto)
+
 
 prepare() {
   cd $pkgname-$pkgver
@@ -32,5 +36,5 @@ check() {
 
 package() {
   cd "$pkgname-$pkgver"
-  install -vDm755 -t "$pkgdir/usr/bin" target/release/openscad-language-server
+  install -vDm755 -t "$pkgdir/usr/bin" target/release/openscad-lsp
 }
