@@ -1,4 +1,5 @@
 # Maintainer: Nick Dowsett <nick42d at gmail dot com>
+
 pkgname=openscad-lsp
 pkgver=1.2.5
 pkgrel=1
