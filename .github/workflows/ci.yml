@@ -21,7 +21,7 @@ jobs:
     - name: Install linux deps
       run: |
         # pacman-contrib is for updpkgsums
-        pacman -Syu git base-devel sudo just namcap pacman-contrib --noconfirm --needed
+        pacman -Syu git base-devel sudo just namcap pacman-contrib rust --noconfirm --needed
       
     - name: Test this ver
       # NOTE: makepkg can't run as root so this is the workaround
