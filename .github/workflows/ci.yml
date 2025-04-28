@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: archlinux
     strategy:
       matrix:
         toolchain: [stable]
@@ -18,12 +20,8 @@ jobs:
 
     - name: Install linux deps
       run: |
-        sudo apt update
-        sudo apt install -y --no-install-recommends snapd
-        sudo snap install just --edge --classic
-
-    - name: Install arch package utils
-      run: bash install-pacman-debian.sh
+        # pacman-contrib is for updpkgsums
+        pacman -Syu git base-devel sudo just namcap pacman-contrib --noconfirm --needed
       
     - name: Test this ver
       run: just test-this-ver
