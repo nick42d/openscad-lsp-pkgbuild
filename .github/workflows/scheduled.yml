@@ -28,7 +28,10 @@ jobs:
       
     - name: Test this ver
       continue-on-error: true
-      run: just test-this-ver
+      # NOTE: makepkg can't run as root so this is the workaround
+      run: |
+        sudo chown -R nobody:nobody .
+        sudo -u nobody just test-this-ver
       
     - name: Test upstream ver
       run: just update-to-upstream

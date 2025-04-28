@@ -24,4 +24,7 @@ jobs:
         pacman -Syu git base-devel sudo just namcap pacman-contrib --noconfirm --needed
       
     - name: Test this ver
-      run: just test-this-ver
+      # NOTE: makepkg can't run as root so this is the workaround
+      run: |
+        sudo chown -R nobody:nobody .
+        sudo -u nobody just test-this-ver
